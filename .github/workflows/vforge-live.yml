@@ -1,0 +1,53 @@
+name: Vforge Live — QA gate
+
+# Gate de entrega: corre el ojo IA contra la app y bloquea el merge si hay
+# defectos por encima del umbral. Para probar contra una preview real (Vercel),
+# reemplaza el paso "Gate" por:
+#   node dist/cli.js gate --url "$PREVIEW_URL" --scenario ./scenarios/demo.json
+# donde PREVIEW_URL viene del deploy de preview.
+
+on:
+  pull_request:
+  push:
+    branches: [claude/vforge-delivery-testing-poyfzs]
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Instalar dependencias
+        run: pnpm install --frozen-lockfile
+
+      - name: Instalar Chromium (Playwright)
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Compilar
+        run: pnpm build
+
+      - name: Gate — QA visual contra la app demo
+        run: >-
+          node dist/cli.js gate
+          --serve ./demo/good
+          --scenario ./scenarios/demo.json
+          --device desktop,iphone
+          --out artifacts/ci
+          --bundle
+
+      - name: Subir reporte (video + hallazgos)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: vforge-live-report
+          path: artifacts/ci
+          if-no-files-found: ignore

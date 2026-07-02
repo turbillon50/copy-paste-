@@ -104,10 +104,41 @@ Opciones: `--url` · `--serve` · `--scenario` (req.) · `--device` · `--out` �
 
 ---
 
+## Gate de entrega (Fase 3) — "lo que pruebo = lo que entrego"
+
+El gate corre la verificación completa contra la **preview** (el build real) y
+**bloquea la promoción a producción** si hay defectos por encima del umbral. Suma
+verificaciones HTTP: status 2xx, headers de seguridad, y presupuesto de performance.
+
+```ts
+import { deployGate, smokeTest } from "vforge-live";
+
+// Antes de promover a prod:
+const decision = await deployGate({ baseUrl: previewUrl, scenarios, failOn: "high" });
+if (!decision.promote) throw new Error(decision.reason); // bloquea el deploy
+
+// Después de desplegar, confirma que quedó vivo:
+const smoke = await smokeTest("https://mi-app.com", { expectText: "Bienvenido" });
+```
+
+CLI (exit code para CI/CD):
+
+```bash
+vforge-live gate  --url https://preview.vercel.app --scenario flujo.json   # exit 1 = no promover
+vforge-live smoke --url https://mi-app.com --expect-text "Bienvenido"       # exit 1 = deploy roto
+```
+
+**CI listo:** `.github/workflows/vforge-live.yml` corre el gate en cada PR (contra la
+app demo por defecto; apúntalo a tu preview de Vercel cambiando `--serve` por `--url`)
+y sube el reporte —con video— como artifact. Un blocker en el gate = merge bloqueado.
+
+---
+
 ## Demo end-to-end
 
 ```bash
-pnpm demo
+pnpm demo      # loop cero-defectos (detecta 12 bugs → fix → verde)
+pnpm gate      # gate de entrega: BLOQUEAR (buggy) vs PROMOVER (good) + smoke test
 ```
 
 Sirve una app con **bugs sembrados** (crash de JS, error de consola, 404 de red, imagen
@@ -141,6 +172,9 @@ Guiones declarativos, legibles por humano e IA (`scenarios/demo.json`):
 | `timeout` (spinner infinito / no aparece) | high |
 | `asset` (imagen/recurso roto) | medium |
 | `visual` (diff vs mockup) | medium |
+| `security` (header faltante) | medium / low |
+| `performance` (fuera de presupuesto) | medium |
+| `deploy` (URL caída / smoke falla) | **blocker** |
 
 Cada hallazgo trae una **huella estable** (fingerprint) para deduplicar y detectar
 regresiones, y un **prompt de fix** copy-paste (`forgePrompt` / `--bundle`).
@@ -158,10 +192,13 @@ src/
   visual-diff.ts   Comparación perceptual contra mockup (pixelmatch)
   prompt-forge.ts  Hallazgo → prompt de fix ejecutable
   report.ts        Reporte HTML con video, timeline y hallazgos
+  http-checks.ts   Verificaciones de entrega: status, headers, performance
+  gate.ts          deployGate() + smokeTest() — gate de deploy (Fase 3)
   notifier.ts      Resumen en consola + webhook
   static-server.ts Servidor estático sin dependencias
   index.ts         SDK: check() y forgeLoop()
-  cli.ts           CLI
+  cli.ts           CLI: check / gate / smoke
+.github/workflows/ Gate de QA en cada PR (bloquea merges)
 demo/              Apps de prueba (limpia + con bugs sembrados)
 scenarios/         Escenarios de ejemplo
 examples/          Demo end-to-end del loop

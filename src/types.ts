@@ -17,7 +17,10 @@ export type Category =
   | "asset" // imagen/recurso roto
   | "timeout" // spinner infinito / elemento que nunca aparece
   | "visual" // diferencia contra el mockup/baseline
-  | "accessibility"; // contraste, labels, etc.
+  | "accessibility" // contraste, labels, etc.
+  | "security" // headers de seguridad faltantes, config insegura
+  | "performance" // fuera del presupuesto de rendimiento
+  | "deploy"; // problema de entrega (status, env, smoke test)
 
 /** Perfil de dispositivo virtual (celular / computadora). */
 export interface DeviceProfile {

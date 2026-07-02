@@ -32,6 +32,15 @@ export { forgePrompt, forgeBundle } from "./prompt-forge.js";
 export { compareImages, type DiffResult } from "./visual-diff.js";
 export { consoleSummary, notifyWebhook } from "./notifier.js";
 export { writeReport, renderReport } from "./report.js";
+export {
+  deployGate,
+  smokeTest,
+  type GateConfig,
+  type GateDecision,
+  type SmokeOptions,
+  type SmokeResult,
+} from "./gate.js";
+export { runHttpChecks, type HttpCheckOptions } from "./http-checks.js";
 
 function emptySummary(): Record<Severity, number> {
   return { blocker: 0, high: 0, medium: 0, low: 0 };

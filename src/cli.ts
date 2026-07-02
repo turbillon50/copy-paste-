@@ -9,7 +9,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { check } from "./index.js";
+import { check, deployGate, smokeTest } from "./index.js";
 import { resolveDevices } from "./devices.js";
 import { serveDir } from "./static-server.js";
 import { consoleSummary, notifyWebhook } from "./notifier.js";
@@ -47,25 +47,38 @@ function loadScenarios(file: string): Scenario[] {
 }
 
 const HELP = `
-Vforge Live — QA visual con ojo IA y loop cero-defectos.
+Vforge Live — QA visual con ojo IA, loop cero-defectos y gate de entrega.
 
 Uso:
-  vforge-live check [opciones]
+  vforge-live check [opciones]     Corre los escenarios y reporta
+  vforge-live gate  [opciones]     Gate de deploy: bloquea (exit 1) si no aprueba
+  vforge-live smoke [opciones]     Smoke test rápido contra una URL ya desplegada
 
-Opciones:
-  --url <url>          URL de la app a probar
+Opciones (check / gate):
+  --url <url>          URL de la app a probar (p.ej. la preview de Vercel)
   --serve <dir>        Sirve una carpeta estática y prueba contra ella (ignora --url)
   --scenario <file>    Archivo JSON con el/los escenario(s)  (requerido)
   --device <lista>     Dispositivos separados por coma. Default: desktop,iphone
                        Opciones: desktop, iphone, pixel, ipad
   --out <dir>          Directorio de artefactos. Default: ./artifacts
-  --fail-on <sev>      Severidad que hace fallar el check: blocker|high|medium|low. Default: high
+  --fail-on <sev>      Severidad que hace fallar: blocker|high|medium|low. Default: high
   --webhook <url>      Envía el veredicto por POST a este webhook
   --bundle             Escribe un bug-bundle.md con los prompts de fix
   --headed             Corre con navegador visible (debug)
 
-Ejemplo:
+Opciones extra de gate:
+  --no-http            No correr verificaciones HTTP (status/headers/perf)
+  --perf-budget <ms>   Presupuesto de tiempo de respuesta. Default 3000
+
+Opciones de smoke:
+  --url <url>          URL de producción (requerido)
+  --expect-text <txt>  Texto que debe aparecer (health visible)
+  --perf-budget <ms>   Presupuesto de tiempo de respuesta
+
+Ejemplos:
   vforge-live check --serve ./demo/buggy --scenario ./scenarios/demo.json --device desktop,iphone
+  vforge-live gate  --url https://mi-app-preview.vercel.app --scenario ./scenarios/demo.json
+  vforge-live smoke --url https://mi-app.com --expect-text "Bienvenido"
 `;
 
 async function main(): Promise<void> {
@@ -76,7 +89,12 @@ async function main(): Promise<void> {
     return;
   }
 
-  if (cmd !== "check") {
+  if (cmd === "smoke") {
+    await runSmoke(args);
+    return;
+  }
+
+  if (cmd !== "check" && cmd !== "gate") {
     console.error(`Comando desconocido: "${cmd}"\n${HELP}`);
     process.exit(2);
   }
@@ -105,30 +123,60 @@ async function main(): Promise<void> {
     process.exit(2);
   }
 
+  const common = {
+    baseUrl,
+    scenarios,
+    devices,
+    outDir: args.out ? String(args.out) : undefined,
+    failOn: (args["fail-on"] as Severity) || undefined,
+    headed: Boolean(args.headed),
+  };
+
   try {
-    const result = await check({
-      baseUrl,
-      scenarios,
-      devices,
-      outDir: args.out ? String(args.out) : undefined,
-      failOn: (args["fail-on"] as Severity) || undefined,
-      headed: Boolean(args.headed),
-    });
-
-    console.log(consoleSummary(result));
-
-    if (args.bundle) {
-      const bundlePath = path.join(result.outDir, "bug-bundle.md");
-      fs.writeFileSync(bundlePath, forgeBundle(result.findings));
-      console.log(`Bug bundle: ${bundlePath}`);
+    if (cmd === "gate") {
+      const decision = await deployGate({
+        ...common,
+        httpChecks: !args["no-http"],
+        http: { perfBudgetMs: args["perf-budget"] ? Number(args["perf-budget"]) : undefined },
+      });
+      console.log(consoleSummary(decision.result));
+      console.log(`\n🚦 GATE: ${decision.promote ? "✅ PROMOVER" : "⛔ BLOQUEAR"} — ${decision.reason}`);
+      if (args.bundle) writeBundle(decision.result.outDir, decision.result.findings);
+      if (args.webhook) await notifyWebhook(String(args.webhook), decision.result);
+      process.exitCode = decision.promote ? 0 : 1;
+    } else {
+      const result = await check(common);
+      console.log(consoleSummary(result));
+      if (args.bundle) writeBundle(result.outDir, result.findings);
+      if (args.webhook) await notifyWebhook(String(args.webhook), result);
+      process.exitCode = result.passed ? 0 : 1;
     }
-
-    if (args.webhook) await notifyWebhook(String(args.webhook), result);
-
-    process.exitCode = result.passed ? 0 : 1;
   } finally {
     if (stopServer) await stopServer();
   }
+}
+
+function writeBundle(outDir: string, findings: Parameters<typeof forgeBundle>[0]): void {
+  const bundlePath = path.join(outDir, "bug-bundle.md");
+  fs.writeFileSync(bundlePath, forgeBundle(findings));
+  console.log(`Bug bundle: ${bundlePath}`);
+}
+
+async function runSmoke(args: Args): Promise<void> {
+  if (!args.url) {
+    console.error("smoke requiere --url <url>\n" + HELP);
+    process.exit(2);
+  }
+  const res = await smokeTest(String(args.url), {
+    expectText: args["expect-text"] ? String(args["expect-text"]) : undefined,
+    outDir: args.out ? String(args.out) : undefined,
+    perfBudgetMs: args["perf-budget"] ? Number(args["perf-budget"]) : undefined,
+  });
+  console.log(`\n💨 SMOKE: ${res.ok ? "✅ OK" : "⛔ FALLÓ"} — ${res.reason}`);
+  for (const f of res.findings.slice(0, 10)) {
+    console.log(`  [${f.severity}] ${f.title} — ${f.detail}`);
+  }
+  process.exitCode = res.ok ? 0 : 1;
 }
 
 main().catch((err) => {

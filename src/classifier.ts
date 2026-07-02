@@ -47,6 +47,12 @@ function inferSeverity(o: RawObservation): Severity {
       return "medium";
     case "accessibility":
       return "low";
+    case "security":
+      return "medium";
+    case "performance":
+      return "medium";
+    case "deploy":
+      return "blocker"; // si la entrega en sí falla, bloquea
     default:
       return "medium";
   }

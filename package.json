@@ -1,6 +1,6 @@
 {
   "name": "vforge-live",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Vforge Live — dispositivos virtuales + ojo IA (graba video) + loop cero-defectos para QA visual de apps generadas por IA.",
   "type": "module",
   "license": "MIT",
@@ -24,6 +24,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "cli": "tsx src/cli.ts",
     "demo": "tsx examples/run-demo.ts",
+    "gate": "tsx examples/run-gate.ts",
     "clean": "rm -rf dist artifacts"
   },
   "dependencies": {
