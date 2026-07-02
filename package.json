@@ -1,0 +1,40 @@
+{
+  "name": "vforge-live",
+  "version": "0.1.0",
+  "description": "Vforge Live — dispositivos virtuales + ojo IA (graba video) + loop cero-defectos para QA visual de apps generadas por IA.",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "vforge-live": "./dist/cli.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "cli": "tsx src/cli.ts",
+    "demo": "tsx examples/run-demo.ts",
+    "clean": "rm -rf dist artifacts"
+  },
+  "dependencies": {
+    "pixelmatch": "^6.0.0",
+    "playwright": "^1.56.0",
+    "pngjs": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/pngjs": "^6.0.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.9.2"
+  }
+}
