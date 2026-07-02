@@ -1,0 +1,14 @@
+{
+  "name": "Login y dashboard",
+  "description": "Flujo básico: abrir la app, iniciar sesión y verificar que llega al dashboard.",
+  "steps": [
+    { "action": "goto", "note": "Abrir la app" },
+    { "action": "expectVisible", "selector": "#login-form", "note": "El formulario de login debe verse" },
+    { "action": "fill", "selector": "#email", "value": "demo@vforge.dev", "note": "Escribir correo" },
+    { "action": "fill", "selector": "#password", "value": "secret123", "note": "Escribir contraseña" },
+    { "action": "click", "selector": "#login", "note": "Presionar Entrar" },
+    { "action": "expectVisible", "selector": "#dashboard", "note": "El dashboard debe aparecer tras login" },
+    { "action": "expectText", "text": "Bienvenido", "note": "El dashboard debe saludar al usuario" },
+    { "action": "screenshot", "name": "dashboard-final", "note": "Captura del estado final" }
+  ]
+}
