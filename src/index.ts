@@ -16,6 +16,7 @@ import type {
   CheckResult,
   Finding,
   RunResult,
+  Scenario,
   Severity,
 } from "./types.js";
 import { SEVERITY_ORDER } from "./types.js";
@@ -176,3 +177,22 @@ export async function forgeLoop(
 
 // Re-export util de consola para conveniencia.
 export { consoleSummary as summary };
+
+/**
+ * Helpers de autoría tipada (identidad en runtime, autocompletado en el editor).
+ * Pensados para que Vforge defina escenarios/config con validación de tipos:
+ *
+ *   import { defineScenario, check } from "vforge-live";
+ *   const login = defineScenario({ name: "Login", steps: [{ action: "goto" }] });
+ */
+export function defineScenario(scenario: Scenario): Scenario {
+  return scenario;
+}
+
+export function defineScenarios(scenarios: Scenario[]): Scenario[] {
+  return scenarios;
+}
+
+export function defineConfig(config: CheckConfig): CheckConfig {
+  return config;
+}

@@ -1,9 +1,31 @@
 {
   "name": "vforge-live",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Vforge Live — dispositivos virtuales + ojo IA (graba video) + loop cero-defectos para QA visual de apps generadas por IA.",
   "type": "module",
   "license": "MIT",
+  "keywords": [
+    "vforge",
+    "qa",
+    "visual-testing",
+    "playwright",
+    "ai",
+    "screenshot",
+    "video",
+    "deploy-gate",
+    "zero-defects"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/turbillon50/copy-paste-.git"
+  },
+  "homepage": "https://github.com/turbillon50/copy-paste-#readme",
+  "bugs": {
+    "url": "https://github.com/turbillon50/copy-paste-/issues"
+  },
+  "engines": {
+    "node": ">=18"
+  },
   "bin": {
     "vforge-live": "./dist/cli.js"
   },
@@ -25,7 +47,9 @@
     "cli": "tsx src/cli.ts",
     "demo": "tsx examples/run-demo.ts",
     "gate": "tsx examples/run-gate.ts",
-    "clean": "rm -rf dist artifacts"
+    "clean": "rm -rf dist artifacts",
+    "prepack": "npm run build",
+    "prepare": "npm run build"
   },
   "dependencies": {
     "pixelmatch": "^6.0.0",

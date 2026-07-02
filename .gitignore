@@ -2,6 +2,7 @@ node_modules/
 dist/
 artifacts/
 *.log
+*.tgz
 .DS_Store
 .env
 .env.local

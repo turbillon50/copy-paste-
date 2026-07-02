@@ -28,12 +28,46 @@ de flujos, y devuelve `{ passed, findings, reportPath }`.
 
 ---
 
-## Instalación
+## Instalación (desarrollo)
 
 ```bash
 pnpm install          # instala deps (Chromium ya viene en el entorno)
 pnpm build            # compila a dist/
 ```
+
+## Instalar en Vforge (consumir el paquete)
+
+El paquete se consume **directamente desde este repo** (`turbillon50/copy-paste-`), sin
+registry externo. El script `prepare` compila `dist/` automáticamente en la instalación,
+así que no hay pasos manuales.
+
+**a) Como git-dependency** (recomendado — fija a un tag o branch):
+
+```bash
+pnpm add "github:turbillon50/copy-paste-#v0.3.0"
+# o una branch:  github:turbillon50/copy-paste-#claude/vforge-delivery-testing-poyfzs
+```
+
+**b) Como tarball** (build reproducible, offline):
+
+```bash
+# en este repo:
+npm pack                     # genera vforge-live-0.3.0.tgz
+# en el proyecto Vforge:
+pnpm add /ruta/a/vforge-live-0.3.0.tgz
+```
+
+**c) Como paquete de workspace** (si Vforge es un monorepo pnpm): agrégalo como
+dependencia de ruta o `workspace:*`.
+
+Luego, desde Vforge:
+
+```ts
+import { check, deployGate, forgeLoop, defineScenario } from "vforge-live";
+```
+
+> Requiere **Node ≥ 18**. En CI recuerda instalar el navegador:
+> `pnpm exec playwright install --with-deps chromium`.
 
 ## Uso — SDK
 
