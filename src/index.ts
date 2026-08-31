@@ -42,6 +42,7 @@ export {
   type SmokeResult,
 } from "./gate.js";
 export { runHttpChecks, type HttpCheckOptions } from "./http-checks.js";
+export { createOjoServer, type OjoServerOptions } from "./ojo-server.js";
 
 function emptySummary(): Record<Severity, number> {
   return { blocker: 0, high: 0, medium: 0, low: 0 };
