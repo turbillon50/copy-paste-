@@ -47,6 +47,7 @@
     "cli": "tsx src/cli.ts",
     "demo": "tsx examples/run-demo.ts",
     "gate": "tsx examples/run-gate.ts",
+    "ojo": "tsx src/ojo-server.ts",
     "clean": "rm -rf dist artifacts",
     "prepack": "npm run build",
     "prepare": "npm run build",
