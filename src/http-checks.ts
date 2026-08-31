@@ -73,6 +73,13 @@ export async function runHttpChecks(
     const isHttps = url.startsWith("https://");
     for (const h of SECURITY_HEADERS) {
       if (h.name === "strict-transport-security" && !isHttps) continue;
+      // CSP frame-ancestors es el reemplazo moderno de X-Frame-Options.
+      if (
+        h.name === "x-frame-options" &&
+        /frame-ancestors/i.test(res.headers.get("content-security-policy") ?? "")
+      ) {
+        continue;
+      }
       if (!res.headers.get(h.name)) {
         add({
           category: "security",

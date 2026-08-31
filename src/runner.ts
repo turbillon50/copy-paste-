@@ -253,6 +253,10 @@ function wireListeners(
   page.on("requestfailed", (req) => {
     const url = req.url();
     if (url.includes("favicon.ico")) return;
+    // net::ERR_ABORTED lo dispara el propio navegador (cancela descargas de
+    // media tras leer metadata, o requests pendientes al navegar). No es un
+    // defecto de la app: reportarlo era un falso positivo.
+    if (req.failure()?.errorText === "net::ERR_ABORTED") return;
     obs({
       category: "network",
       title: "Request fallido (sin respuesta)",
