@@ -1,0 +1,180 @@
+{
+  "generatedAt": "2026-08-31T02:53:44.720Z",
+  "version": "0.3.0",
+  "host": "Hetzner v-forge",
+  "buggy": {
+    "label": "buggy",
+    "promote": false,
+    "reason": "8 defecto(s) ≥ high bloquean la promoción (Excepción no capturada (crash de JS); Excepción no capturada (crash de JS); Error de consola…).",
+    "summary": {
+      "blocker": 2,
+      "high": 6,
+      "medium": 5,
+      "low": 2
+    },
+    "total": 15,
+    "durationMs": 20251,
+    "devices": [
+      "desktop",
+      "iphone"
+    ],
+    "report": "buggy/report.html",
+    "video": "buggy/login-y-dashboard__desktop/video/page@dc48f907a1042ee2fbb52348d2cf48d6.webm",
+    "finalShot": "buggy/login-y-dashboard__desktop/final.png",
+    "findings": [
+      {
+        "severity": "blocker",
+        "category": "crash",
+        "title": "Excepción no capturada (crash de JS)",
+        "detail": "guardarSesion is not defined",
+        "device": "desktop"
+      },
+      {
+        "severity": "blocker",
+        "category": "crash",
+        "title": "Excepción no capturada (crash de JS)",
+        "detail": "guardarSesion is not defined",
+        "device": "iphone"
+      },
+      {
+        "severity": "high",
+        "category": "console",
+        "title": "Error de consola",
+        "detail": "No se pudo cargar la configuración remota (config.json)",
+        "device": "desktop"
+      },
+      {
+        "severity": "high",
+        "category": "timeout",
+        "title": "Elemento nunca apareció (posible spinner infinito / bloqueo)",
+        "detail": "Paso #5 (Verificar visible #dashboard — El dashboard debe aparecer tras login): locator.waitFor: Timeout 8000ms exceeded.",
+        "device": "desktop"
+      },
+      {
+        "severity": "high",
+        "category": "functional",
+        "title": "Aserción del escenario falló",
+        "detail": "Paso #6 (Verificar texto \"Bienvenido\" — El dashboard debe saludar al usuario): Se esperaba el texto \"Bienvenido\", no se encontró.",
+        "device": "desktop"
+      },
+      {
+        "severity": "high",
+        "category": "console",
+        "title": "Error de consola",
+        "detail": "No se pudo cargar la configuración remota (config.json)",
+        "device": "iphone"
+      },
+      {
+        "severity": "high",
+        "category": "timeout",
+        "title": "Elemento nunca apareció (posible spinner infinito / bloqueo)",
+        "detail": "Paso #5 (Verificar visible #dashboard — El dashboard debe aparecer tras login): locator.waitFor: Timeout 8000ms exceeded.",
+        "device": "iphone"
+      },
+      {
+        "severity": "high",
+        "category": "functional",
+        "title": "Aserción del escenario falló",
+        "detail": "Paso #6 (Verificar texto \"Bienvenido\" — El dashboard debe saludar al usuario): Se esperaba el texto \"Bienvenido\", no se encontró.",
+        "device": "iphone"
+      },
+      {
+        "severity": "medium",
+        "category": "asset",
+        "title": "Imagen/recurso roto (404)",
+        "detail": "404 en http://127.0.0.1:34157/logo-inexistente.png",
+        "device": "desktop"
+      },
+      {
+        "severity": "medium",
+        "category": "network",
+        "title": "Respuesta HTTP 404",
+        "detail": "404 en http://127.0.0.1:34157/api/config",
+        "device": "desktop"
+      },
+      {
+        "severity": "medium",
+        "category": "asset",
+        "title": "Imagen/recurso roto (404)",
+        "detail": "404 en http://127.0.0.1:34157/logo-inexistente.png",
+        "device": "iphone"
+      },
+      {
+        "severity": "medium",
+        "category": "network",
+        "title": "Respuesta HTTP 404",
+        "detail": "404 en http://127.0.0.1:34157/api/config",
+        "device": "iphone"
+      },
+      {
+        "severity": "medium",
+        "category": "security",
+        "title": "Falta header de seguridad: x-frame-options",
+        "detail": "x-frame-options — evita clickjacking (o usa CSP frame-ancestors). No presente en la respuesta de http://127.0.0.1:34157.",
+        "device": "http"
+      },
+      {
+        "severity": "low",
+        "category": "security",
+        "title": "Falta header de seguridad: x-content-type-options",
+        "detail": "x-content-type-options — evita MIME sniffing (nosniff). No presente en la respuesta de http://127.0.0.1:34157.",
+        "device": "http"
+      },
+      {
+        "severity": "low",
+        "category": "security",
+        "title": "Falta header de seguridad: content-security-policy",
+        "detail": "content-security-policy — mitiga XSS e inyección de contenido. No presente en la respuesta de http://127.0.0.1:34157.",
+        "device": "http"
+      }
+    ]
+  },
+  "good": {
+    "label": "good",
+    "promote": true,
+    "reason": "Sin defectos ≥ high. Seguro promover a producción.",
+    "summary": {
+      "blocker": 0,
+      "high": 0,
+      "medium": 1,
+      "low": 2
+    },
+    "total": 3,
+    "durationMs": 3459,
+    "devices": [
+      "desktop",
+      "iphone"
+    ],
+    "report": "good/report.html",
+    "video": "good/login-y-dashboard__desktop/video/page@4e7a5c2fa2953be95d066be3bff2946f.webm",
+    "finalShot": "good/login-y-dashboard__desktop/final.png",
+    "findings": [
+      {
+        "severity": "medium",
+        "category": "security",
+        "title": "Falta header de seguridad: x-frame-options",
+        "detail": "x-frame-options — evita clickjacking (o usa CSP frame-ancestors). No presente en la respuesta de http://127.0.0.1:34021.",
+        "device": "http"
+      },
+      {
+        "severity": "low",
+        "category": "security",
+        "title": "Falta header de seguridad: x-content-type-options",
+        "detail": "x-content-type-options — evita MIME sniffing (nosniff). No presente en la respuesta de http://127.0.0.1:34021.",
+        "device": "http"
+      },
+      {
+        "severity": "low",
+        "category": "security",
+        "title": "Falta header de seguridad: content-security-policy",
+        "detail": "content-security-policy — mitiga XSS e inyección de contenido. No presente en la respuesta de http://127.0.0.1:34021.",
+        "device": "http"
+      }
+    ]
+  },
+  "smoke": {
+    "ok": true,
+    "reason": "Deploy vivo y sano en producción.",
+    "total": 3
+  }
+}

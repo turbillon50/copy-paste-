@@ -1,0 +1,7 @@
+- heading "Iniciar sesión" [level=1]
+- img "logo"
+- text: Correo
+- textbox "Correo": demo@vforge.dev
+- text: Contraseña
+- textbox "Contraseña": secret123
+- button "Entrar"

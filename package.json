@@ -49,7 +49,8 @@
     "gate": "tsx examples/run-gate.ts",
     "clean": "rm -rf dist artifacts",
     "prepack": "npm run build",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "site": "tsx examples/build-site.ts"
   },
   "dependencies": {
     "pixelmatch": "^6.0.0",

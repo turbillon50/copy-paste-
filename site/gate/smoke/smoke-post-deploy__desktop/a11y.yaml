@@ -1,0 +1,6 @@
+- heading "Iniciar sesión" [level=1]
+- text: Correo
+- textbox "Correo"
+- text: Contraseña
+- textbox "Contraseña"
+- button "Entrar"

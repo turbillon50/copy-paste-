@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sala de gate — Vforge Live</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0a0814">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+.room{max-width:1240px;margin:0 auto;padding:22px 24px 40px;position:relative;z-index:1}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-bottom:16px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.top h1{font-size:22px;letter-spacing:-.02em;font-weight:800;margin:2px 0 0}
+.top .id{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.status{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--green);border:1px solid rgba(52,211,153,.4);background:rgba(52,211,153,.08);padding:7px 11px;border-radius:8px}
+.status i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:18px}
+.kpi{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:linear-gradient(180deg,var(--surface),rgba(10,8,20,.7))}
+.kpi .l{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+.kpi .n{font-size:28px;font-weight:900;letter-spacing:-.03em;line-height:1.1;margin-top:6px;color:var(--c,var(--pearl))}
+.kpi.red{--c:var(--red)} .kpi.green{--c:var(--green)} .kpi.cyan{--c:var(--cyan)} .kpi.gold{--c:var(--gold)}
+.panel{display:grid;grid-template-columns:1.25fr .75fr;gap:14px}
+.decision{padding:20px}
+.decision h3{font-size:19px}
+.finding{grid-template-columns:78px 92px 1fr auto;padding:8px 0;font-size:13px}
+.side{display:grid;gap:14px;align-content:start}
+.smoke{border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--surface)}
+.smoke h4,.artf h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px}
+.smoke .r{font-size:14px;color:var(--muted)}
+.smoke .r b{color:var(--green)}
+.artf{border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--surface)}
+.artf a{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px;color:var(--pearl)}
+.artf a:last-child{border-bottom:0}
+.artf a span{font-family:var(--mono);font-size:11px;color:var(--dim)}
+.artf a:hover{color:var(--cyan)}
+.shot{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#000}
+.shot img{display:block;width:100%}
+.shot .c{padding:8px 12px;font-family:var(--mono);font-size:11px;color:var(--dim);border-top:1px solid var(--line);background:var(--surface)}
+@media (max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.panel{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="room">
+  <div class="top">
+    <div>
+      <div class="id"><span class="eyebrow"><span class="dot"></span>Sala de gate · Vforge Live v0.3.0</span></div>
+      <h1>Gate de entrega — corrida del 30 ago 2026, 8:53 p.m.</h1>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <span class="status"><i></i>gate operando</span>
+      <a class="btn small" href="../">Landing</a>
+      <a class="btn small" href="summary.json">summary.json</a>
+    </div>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi red"><div class="l">App con bugs</div><div class="n">15 <span style="font-size:12px;color:var(--muted);font-weight:600">hallazgos</span></div></div>
+    <div class="kpi green"><div class="l">App corregida</div><div class="n">0 <span style="font-size:12px;color:var(--muted);font-weight:600">bloqueantes · 3 avisos</span></div></div>
+    <div class="kpi gold"><div class="l">Blocker / high</div><div class="n">2 / 6</div></div>
+    <div class="kpi cyan"><div class="l">Dispositivos</div><div class="n">2 <span style="font-size:12px;color:var(--muted);font-weight:600">desktop · iphone</span></div></div>
+    <div class="kpi"><div class="l">Smoke post-deploy</div><div class="n" style="color:var(--green)">OK</div></div>
+  </div>
+
+  <div class="panel">
+    <div class="decision block">
+      <span class="verdict"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg>Bloquear</span>
+      <h3>App con bugs sembrados · Login y dashboard</h3>
+      <p class="why">8 defecto(s) ≥ high bloquean la promoción (Excepción no capturada (crash de JS); Excepción no capturada (crash de JS); Error de consola…).</p>
+      <div class="sevs"><span><b>2</b>blocker</span><span><b>6</b>high</span><span><b>5</b>medium</span><span><b>2</b>low</span><span><b>20.3s</b>duración</span></div>
+      <ul class="findings">
+<li class="finding" data-sev="blocker">
+  <span class="sev">blocker</span>
+  <span class="cat">crash</span>
+  <span class="title">Excepción no capturada (crash de JS)</span>
+  <span class="dev">desktop</span>
+</li>
+<li class="finding" data-sev="blocker">
+  <span class="sev">blocker</span>
+  <span class="cat">crash</span>
+  <span class="title">Excepción no capturada (crash de JS)</span>
+  <span class="dev">iphone</span>
+</li>
+<li class="finding" data-sev="high">
+  <span class="sev">high</span>
+  <span class="cat">console</span>
+  <span class="title">Error de consola</span>
+  <span class="dev">desktop</span>
+</li>
+<li class="finding" data-sev="high">
+  <span class="sev">high</span>
+  <span class="cat">timeout</span>
+  <span class="title">Elemento nunca apareció (posible spinner infinito / bloqueo)</span>
+  <span class="dev">desktop</span>
+</li>
+<li class="finding" data-sev="high">
+  <span class="sev">high</span>
+  <span class="cat">functional</span>
+  <span class="title">Aserción del escenario falló</span>
+  <span class="dev">desktop</span>
+</li>
+<li class="finding" data-sev="high">
+  <span class="sev">high</span>
+  <span class="cat">console</span>
+  <span class="title">Error de consola</span>
+  <span class="dev">iphone</span>
+</li>
+<li class="finding" data-sev="high">
+  <span class="sev">high</span>
+  <span class="cat">timeout</span>
+  <span class="title">Elemento nunca apareció (posible spinner infinito / bloqueo)</span>
+  <span class="dev">iphone</span>
+</li>
+<li class="finding" data-sev="high">
+  <span class="sev">high</span>
+  <span class="cat">functional</span>
+  <span class="title">Aserción del escenario falló</span>
+  <span class="dev">iphone</span>
+</li>
+<li class="finding" data-sev="medium">
+  <span class="sev">medium</span>
+  <span class="cat">asset</span>
+  <span class="title">Imagen/recurso roto (404)</span>
+  <span class="dev">desktop</span>
+</li>
+<li class="finding" data-sev="medium">
+  <span class="sev">medium</span>
+  <span class="cat">network</span>
+  <span class="title">Respuesta HTTP 404</span>
+  <span class="dev">desktop</span>
+</li>
+<li class="finding" data-sev="medium">
+  <span class="sev">medium</span>
+  <span class="cat">asset</span>
+  <span class="title">Imagen/recurso roto (404)</span>
+  <span class="dev">iphone</span>
+</li>
+<li class="finding" data-sev="medium">
+  <span class="sev">medium</span>
+  <span class="cat">network</span>
+  <span class="title">Respuesta HTTP 404</span>
+  <span class="dev">iphone</span>
+</li>
+<li class="finding" data-sev="medium">
+  <span class="sev">medium</span>
+  <span class="cat">security</span>
+  <span class="title">Falta header de seguridad: x-frame-options</span>
+  <span class="dev">http</span>
+</li>
+<li class="finding" data-sev="low">
+  <span class="sev">low</span>
+  <span class="cat">security</span>
+  <span class="title">Falta header de seguridad: x-content-type-options</span>
+  <span class="dev">http</span>
+</li>
+<li class="finding" data-sev="low">
+  <span class="sev">low</span>
+  <span class="cat">security</span>
+  <span class="title">Falta header de seguridad: content-security-policy</span>
+  <span class="dev">http</span>
+</li>
+      </ul>
+      <div class="links"><a class="btn small primary" href="buggy/report.html">Reporte con video</a><a class="btn small" href="buggy/bug-bundle.md">Bug-bundle</a><a class="btn small" href="../demo/buggy/" target="_blank" rel="noopener">Abrir la app</a></div>
+    </div>
+
+    <div class="side">
+      <div class="decision promote">
+        <span class="verdict"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></svg>Promover</span>
+        <h3>App corregida</h3>
+        <p class="why">Sin defectos ≥ high. Seguro promover a producción.</p>
+        <div class="sevs"><span><b>0</b>bloqueantes</span><span><b>3</b>avisos (headers)</span><span><b>3.5s</b>duración</span></div>
+        <div class="links"><a class="btn small" href="good/report.html">Reporte</a><a class="btn small" href="../demo/good/" target="_blank" rel="noopener">Abrir la app</a></div>
+      </div>
+      <div class="shot"><img src="good/login-y-dashboard__desktop/final.png" alt="Estado final de la app corregida" loading="lazy"><div class="c">estado final · escritorio 1440×900 · app corregida</div></div>
+      <div class="smoke"><h4>Smoke test post-deploy</h4><div class="r"><b>OK</b> — Deploy vivo y sano en producción.</div></div>
+      <div class="artf"><h4>Artefactos</h4>
+        <a href="buggy/report.html">Reporte app con bugs <span>html · video · shots</span></a>
+        <a href="good/report.html">Reporte app corregida <span>html · video · shots</span></a>
+        <a href="smoke/report.html">Reporte smoke <span>html</span></a>
+        <a href="buggy/bug-bundle.md">Bug-bundle <span>md · prompts de fix</span></a>
+        <a href="summary.json">Resumen de la corrida <span>json</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

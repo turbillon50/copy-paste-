@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Vforge Live — Reporte</title>
+<style>
+  :root{color-scheme:light dark}
+  body{font:15px/1.5 -apple-system,Segoe UI,Roboto,sans-serif;margin:0;background:#0b0f17;color:#e5e7eb}
+  header{padding:24px 32px;background:linear-gradient(135deg,#1e293b,#0b0f17);border-bottom:1px solid #1f2937}
+  h1{margin:0 0 4px;font-size:22px}
+  .sub{color:#94a3b8;font-size:13px}
+  main{padding:24px 32px;max-width:1100px;margin:0 auto}
+  .cards{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0 28px}
+  .stat{flex:1;min-width:120px;background:#111827;border:1px solid #1f2937;border-radius:12px;padding:16px}
+  .stat .n{font-size:28px;font-weight:700}
+  .stat .l{font-size:12px;color:#94a3b8;text-transform:uppercase;letter-spacing:.05em}
+  h2{margin:28px 0 12px;font-size:18px;border-bottom:1px solid #1f2937;padding-bottom:8px}
+  .finding{background:#111827;border-radius:10px;padding:14px 16px;margin:10px 0}
+  .finding-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .badge{color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px}
+  .cat{font-size:12px;color:#93c5fd;background:#1e3a8a33;padding:2px 8px;border-radius:999px}
+  .meta{color:#94a3b8;font-size:12px}
+  .detail{margin:8px 0;color:#cbd5e1;font-size:14px;word-break:break-word}
+  .thumb{max-width:320px;border-radius:8px;border:1px solid #1f2937;margin-top:8px}
+  details{margin-top:8px}
+  summary{cursor:pointer;color:#93c5fd;font-size:13px}
+  pre{background:#0b0f17;border:1px solid #1f2937;border-radius:8px;padding:12px;overflow:auto;font-size:12px;white-space:pre-wrap}
+  .run{background:#0d1420;border:1px solid #1f2937;border-radius:12px;padding:16px;margin:16px 0}
+  .video{max-width:520px;width:100%;border-radius:10px;border:1px solid #1f2937;background:#000}
+  .novideo{color:#94a3b8;font-size:13px;padding:8px 0}
+  .timeline{display:flex;gap:8px;overflow-x:auto;padding:12px 0}
+  .frame{flex:0 0 160px}
+  .frame img{width:160px;border-radius:8px;border:2px solid #1f2937}
+  .frame.bad img{border-color:#dc2626}
+  .frame.ok img{border-color:#16a34a55}
+  .frame-cap{font-size:11px;color:#94a3b8;margin-top:4px}
+  .pass{color:#22c55e;font-weight:700}
+  .fail{color:#f87171;font-weight:700}
+  .verdict{font-size:16px;font-weight:700;padding:12px 16px;border-radius:10px;margin:8px 0 0}
+</style></head>
+<body>
+<header>
+  <h1>🔭 Vforge Live — Reporte de entrega</h1>
+  <div class="sub">http://127.0.0.1:34157 · 2 corrida(s) · 20251ms</div>
+  <div class="verdict" style="background:#450a0a;color:#f87171">⛔ NO APROBADO — hay defectos por encima del umbral</div>
+</header>
+<main>
+  <div class="cards">
+    <div class="stat"><div class="n" style="color:#dc2626">2</div><div class="l">Blocker</div></div>
+    <div class="stat"><div class="n" style="color:#ea580c">6</div><div class="l">High</div></div>
+    <div class="stat"><div class="n" style="color:#ca8a04">5</div><div class="l">Medium</div></div>
+    <div class="stat"><div class="n" style="color:#6b7280">2</div><div class="l">Low</div></div>
+  </div>
+  
+  <h2>Hallazgos priorizados (15)</h2>
+  
+  <div class="finding" style="border-left:4px solid #dc2626">
+    <div class="finding-head">
+      <span class="badge" style="background:#dc2626">BLOCKER</span>
+      <span class="cat">crash</span>
+      <strong>Excepción no capturada (crash de JS)</strong>
+      <span class="meta">· Login y dashboard · desktop</span>
+    </div>
+    <div class="detail">guardarSesion is not defined</div>
+    
+    <details><summary>Prompt de fix (copy-paste)</summary><pre>[BLOCKER · crash] Excepción no capturada (crash de JS)
+Dispositivo: desktop. Ocurre en el flujo &quot;Login y dashboard&quot;.
+Síntoma observado por el ojo IA: guardarSesion is not defined
+
+Tarea: Es una excepción no capturada: envuelve el punto de fallo, valida entradas nulas/undefined y añade un ErrorBoundary si es UI.
+Restricciones: cambio mínimo y quirúrgico. No refactorices de más. Incluye el path exacto del archivo que tocas.
+Verificación: vuelve a correr el escenario &quot;Login y dashboard&quot; en Vforge Live; el hallazgo (fingerprint f8e5fc56fefe) no debe reaparecer.</pre></details>
+  </div>
+  <div class="finding" style="border-left:4px solid #dc2626">
+    <div class="finding-head">
+      <span class="badge" style="background:#dc2626">BLOCKER</span>
+      <span class="cat">crash</span>
+      <strong>Excepción no capturada (crash de JS)</strong>
+      <span class="meta">· Login y dashboard · iphone</span>
+    </div>
+    <div class="detail">guardarSesion is not defined</div>
+    
+    <details><summary>Prompt de fix (copy-paste)</summary><pre>[BLOCKER · crash] Excepción no capturada (crash de JS)
+Dispositivo: iphone. Ocurre en el flujo &quot;Login y dashboard&quot;.
+Síntoma observado por el ojo IA: guardarSesion is not defined
+
+Tarea: Es una excepción no capturada: envuelve el punto de fallo, valida entradas nulas/undefined y añade un ErrorBoundary si es UI.
+Restricciones: cambio mínimo y quirúrgico. No refactorices de más. Incluye el path exacto del archivo que tocas.
+Verificación: vuelve a correr el escenario &quot;Login y dashboard&quot; en Vforge Live; el hallazgo (fingerprint f8e5fc56fefe) no debe reaparecer.</pre></details>
+  </div>
+  <div class="finding" style="border-left:4px solid #ea580c">
+    <div class="finding-head">
+      <span class="badge" style="background:#ea580c">HIGH</span>
+      <span class="cat">console</span>
+      <strong>Error de consola</strong>
+      <span class="meta">· Login y dashboard · desktop</span>
+    </div>
+    <div class="detail">No se pudo cargar la configuración remota (config.json)</div>
+    
+    <details><summary>Prompt de fix (copy-paste)</summary><pre>[HIGH · console] Error de consola
+Dispositivo: desktop. Ocurre en el flujo &quot;Login y dashboard&quot;.
+Síntoma observado por el ojo IA: No se pudo cargar la configuración remota (config.json)
+
+Tarea: Localiza el origen del log en el código; si es un error real, corrígelo; si es ruido, elimínalo o degrádalo a debug.
+Restricciones: cambio mínimo y quirúrgico. No refactorices de más. Incluye el path exacto del archivo que tocas.
+Verificación: vuelve a correr el escenario &quot;Login y dashboard&quot; en Vforge Live; el hallazgo (fingerprint 420093fbc0c9) no debe reaparecer.</pre></details>
+  </div>
+  <div class="finding" style="border-left:4px solid #ea580c">
+    <div class="finding-head">
+      <span class="badge" style="background:#ea580c">HIGH</span>
+      <span class="cat">timeout</span>
+      <strong>Elemento nunca apareció (posible spinner infinito / bloqueo)</strong>
+      <span class="meta">· Login y dashboard · desktop</span>
+    </div>
+    <div class="detail">Paso #5 (Verificar visible #dashboard — El dashboard debe aparecer tras login): locator.waitFor: Timeout 8000ms exceeded.</div>
+    <img class="thumb" src="login-y-dashboard__desktop/screenshots/fail-step-05.png" loading="lazy" alt="captura del fallo"/>
+    <details><summary>Prompt de fix (copy-paste)</summary><pre>[HIGH · timeout] Elemento nunca apareció (posible spinner infinito / bloqueo)
+Dispositivo: desktop. Ocurre en el flujo &quot;Login y dashboard&quot;, paso: El dashboard debe aparecer tras login.
+Síntoma observado por el ojo IA: Paso #5 (Verificar visible #dashboard — El dashboard debe aparecer tras login): locator.waitFor: Timeout 8000ms exceeded.
+
+Tarea: Algo no aparece a tiempo (posible spinner infinito): añade timeout + estado de error, y verifica la promesa que nunca resuelve.
+Restricciones: cambio mínimo y quirúrgico. No refactorices de más. Incluye el path exacto del archivo que tocas.
+Verificación: vuelve a correr el escenario &quot;Login y dashboard&quot; en Vforge Live; el hallazgo (fingerprint d44e28efd93c) no debe reaparecer.</pre></details>
+  </div>
+  <div class="finding" style="border-left:4px solid #ea580c">
+    <div class="finding-head">
+      <span class="badge" style="background:#ea580c">HIGH</span>
+      <span class="cat">functional</span>
+      <strong>Aserción del escenario falló</strong>
+      <span class="meta">· Login y dashboard · desktop</span>
+    </div>
+    <div class="detail">Paso #6 (Verificar texto &quot;Bienvenido&quot; — El dashboard debe saludar al usuario): Se esperaba el texto &quot;Bienvenido&quot;, no se encontró.</div>
+    <img class="thumb" src="login-y-dashboard__desktop/screenshots/fail-step-06.png" loading="lazy" alt="captura del fallo"/>
+    <details><summary>Prompt de fix (copy-paste)</summary><pre>[HIGH · functional] Aserción del escenario falló
+Dispositivo: desktop. Ocurre en el flujo &quot;Login y dashboard&quot;, paso: El dashboard debe saludar al usuario.
+Síntoma observado por el ojo IA: Paso #6 (Verificar texto &quot;Bienvenido&quot; — El dashboard debe saludar al usuario): Se esperaba el texto &quot;Bienvenido&quot;, no se encontró.
+
+Tarea: El flujo esperado no ocurrió: revisa el handler del paso, el estado y la condición que impide el resultado esperado.
+Restricciones: cambio mínimo y quirúrgico. No refactorices de más. Incluye el path exacto del archivo que tocas.
+Verificación: vuelve a correr el escenario &quot;Login y dashboard&quot; en Vforge Live; el hallazgo (fingerprint 28b977d70aaa) no debe reaparecer.</pre></details>
+  </div>
+  <div class="finding" style="border-left:4px solid #ea580c">
+    <div class="finding-head">
+      <span class="badge" style="background:#ea580c">HIGH</span>
+      <span class="cat">console</span>
+      <strong>Error de consola</strong>
+      <span class="meta">· Login y dashboard · iphone</span>
+    </div>
+    <div class="detail">No se pudo cargar la configuración remota (config.json)</div>
+    
+    <details><summary>Prompt de fix (copy-paste)</summary><pre>[HIGH · console] Error de consola
+Dispositivo: iphone. Ocurre en el flujo &quot;Login y dashboard&quot;.
+Síntoma observado por el ojo IA: No se pudo cargar la configuración remota (config.json)
+
+Tarea: Localiza el origen del log en el código; si es un error real, corrígelo; si es ruido, elimínalo o degrádalo a debug.
+Restricciones: cambio mínimo y quirúrgico. No refactorices de más. Incluye el path exacto del archivo que tocas.
+Verificación: vuelve a correr el escenario &quot;Login y dashboard&quot; en Vforge Live; el hallazgo (fingerprint 420093fbc0c9) no debe reaparecer.</pre></details>
+  </div>
+  <div class="finding" style="border-left:4px solid #ea580c">
+    <div class="finding-head">
+      <span class="badge" style="background:#ea580c">HIGH</span>
+      <span class="cat">timeout</span>
+      <strong>Elemento nunca apareció (posible spinner infinito / bloqueo)</strong>
+      <span class="meta">· Login y dashboard · iphone</span>
+    </div>
+    <div class="detail">Paso #5 (Verificar visible #dashboard — El dashboard debe aparecer tras login): locator.waitFor: Timeout 8000ms exceeded.</div>
+    <img class="thumb" src="login-y-dashboard__iphone/screenshots/fail-step-05.png" loading="lazy" alt="captura del fallo"/>
+    <details><summary>Prompt de fix (copy-paste)</summary><pre>[HIGH · timeout] Elemento nunca apareció (posible spinner infinito / bloqueo)
+Dispositivo: iphone. Ocurre en el flujo &quot;Login y dashboard&quot;, paso: El dashboard debe aparecer tras login.
+Síntoma observado por el ojo IA: Paso #5 (Verificar visible #dashboard — El dashboard debe aparecer tras login): locator.waitFor: Timeout 8000ms exceeded.
+
+Tarea: Algo no aparece a tiempo (posible spinner infinito): añade timeout + estado de error, y verifica la promesa que nunca resuelve.
+Restricciones: cambio mínimo y quirúrgico. No refactorices de más. Incluye el path exacto del archivo que tocas.
+Verificación: vuelve a correr el escenario &quot;Login y dashboard&quot; en Vforge Live; el hallazgo (fingerprint d44e28efd93c) no debe reaparecer.</pre></details>
+  </div>
+  <div class="finding" style="border-left:4px solid #ea580c">
+    <div class="finding-head">
+      <span class="badge" style="background:#ea580c">HIGH</span>
+      <span class="cat">functional</span>
+      <strong>Aserción del escenario falló</strong>
+      <span class="meta">· Login y dashboard · iphone</span>
+    </div>
+    <div class="detail">Paso #6 (Verificar texto &quot;Bienvenido&quot; — El dashboard debe saludar al usuario): Se esperaba el texto &quot;Bienvenido&quot;, no se encontró.</div>
+    <img class="thumb" src="login-y-dashboard__iphone/screenshots/fail-step-06.png" loading="lazy" alt="captura del fallo"/>
+    <details><summary>Prompt de fix (copy-paste)</summary><pre>[HIGH · functional] Aserción del escenario falló
+Dispositivo: iphone. Ocurre en el flujo &quot;Login y dashboard&quot;, paso: El dashboard debe saludar al usuario.
+Síntoma observado por el ojo IA: Paso #6 (Verificar texto &quot;Bienvenido&quot; — El dashboard debe saludar al usuario): Se esperaba el texto &quot;Bienvenido&quot;, no se encontró.
+
+Tarea: El flujo esperado no ocurrió: revisa el handler del paso, el estado y la condición que impide el resultado esperado.
+Restricciones: cambio mínimo y quirúrgico. No refactorices de más. Incluye el path exacto del archivo que tocas.
+Verificación: vuelve a correr el escenario &quot;Login y dashboard&quot; en Vforge Live; el hallazgo (fingerprint 28b977d70aaa) no debe reaparecer.</pre></details>
+  </div>
+  <div class="finding" style="border-left:4px solid #ca8a04">
+    <div class="finding-head">
+      <span class="badge" style="background:#ca8a04">MEDIUM</span>
+      <span class="cat">asset</span>
+      <strong>Imagen/recurso roto (404)</strong>
+      <span class="meta">· Login y dashboard · desktop</span>
+    </div>
+    <div class="detail">404 en http://127.0.0.1:34157/logo-inexistente.png</div>
+    
+    <details><summary>Prompt de fix (copy-paste)</summary><pre>[MEDIUM · asset] Imagen/recurso roto (404)
+Dispositivo: desktop. Ocurre en el flujo &quot;Login y dashboard&quot;.
+Síntoma observado por el ojo IA: 404 en http://127.0.0.1:34157/logo-inexistente.png
+
+Tarea: Recurso roto: corrige la ruta del asset, o añade fallback/placeholder y lazy-loading con onError.
+Restricciones: cambio mínimo y quirúrgico. No refactorices de más. Incluye el path exacto del archivo que tocas.
+Verificación: vuelve a correr el escenario &quot;Login y dashboard&quot; en Vforge Live; el hallazgo (fingerprint d11a67ce5547) no debe reaparecer.</pre></details>
+  </div>
+  <div class="finding" style="border-left:4px solid #ca8a04">
+    <div class="finding-head">
+      <span class="badge" style="background:#ca8a04">MEDIUM</span>
+      <span class="cat">network</span>
+      <strong>Respuesta HTTP 404</strong>
+      <span class="meta">· Login y dashboard · desktop</span>
+    </div>
+    <div class="detail">404 en http://127.0.0.1:34157/api/config</div>
+    
+    <details><summary>Prompt de fix (copy-paste)</summary><pre>[MEDIUM · network] Respuesta HTTP 404
+Dispositivo: desktop. Ocurre en el flujo &quot;Login y dashboard&quot;.
+Síntoma observado por el ojo IA: 404 en http://127.0.0.1:34157/api/config
+
+Tarea: Revisa el endpoint que devuelve el status: URL, método, auth y manejo de error en el cliente. Añade manejo de fallo visible al usuario.
+Restricciones: cambio mínimo y quirúrgico. No refactorices de más. Incluye el path exacto del archivo que tocas.
+Verificación: vuelve a correr el escenario &quot;Login y dashboard&quot; en Vforge Live; el hallazgo (fingerprint 4bcd7fe07a10) no debe reaparecer.</pre></details>
+  </div>
+  <div class="finding" style="border-left:4px solid #ca8a04">
+    <div class="finding-head">
+      <span class="badge" style="background:#ca8a04">MEDIUM</span>
+      <span class="cat">asset</span>
+      <strong>Imagen/recurso roto (404)</strong>
+      <span class="meta">· Login y dashboard · iphone</span>
+    </div>
+    <div class="detail">404 en http://127.0.0.1:34157/logo-inexistente.png</div>
+    
+    <details><summary>Prompt de fix (copy-paste)</summary><pre>[MEDIUM · asset] Imagen/recurso roto (404)
+Dispositivo: iphone. Ocurre en el flujo &quot;Login y dashboard&quot;.
+Síntoma observado por el ojo IA: 404 en http://127.0.0.1:34157/logo-inexistente.png
+
+Tarea: Recurso roto: corrige la ruta del asset, o añade fallback/placeholder y lazy-loading con onError.
+Restricciones: cambio mínimo y quirúrgico. No refactorices de más. Incluye el path exacto del archivo que tocas.
+Verificación: vuelve a correr el escenario &quot;Login y dashboard&quot; en Vforge Live; el hallazgo (fingerprint d11a67ce5547) no debe reaparecer.</pre></details>
+  </div>
+  <div class="finding" style="border-left:4px solid #ca8a04">
+    <div class="finding-head">
+      <span class="badge" style="background:#ca8a04">MEDIUM</span>
+      <span class="cat">network</span>
+      <strong>Respuesta HTTP 404</strong>
+      <span class="meta">· Login y dashboard · iphone</span>
+    </div>
+    <div class="detail">404 en http://127.0.0.1:34157/api/config</div>
+    
+    <details><summary>Prompt de fix (copy-paste)</summary><pre>[MEDIUM · network] Respuesta HTTP 404
+Dispositivo: iphone. Ocurre en el flujo &quot;Login y dashboard&quot;.
+Síntoma observado por el ojo IA: 404 en http://127.0.0.1:34157/api/config
+
+Tarea: Revisa el endpoint que devuelve el status: URL, método, auth y manejo de error en el cliente. Añade manejo de fallo visible al usuario.
+Restricciones: cambio mínimo y quirúrgico. No refactorices de más. Incluye el path exacto del archivo que tocas.
+Verificación: vuelve a correr el escenario &quot;Login y dashboard&quot; en Vforge Live; el hallazgo (fingerprint 4bcd7fe07a10) no debe reaparecer.</pre></details>
+  </div>
+  <div class="finding" style="border-left:4px solid #ca8a04">
+    <div class="finding-head">
+      <span class="badge" style="background:#ca8a04">MEDIUM</span>
+      <span class="cat">security</span>
+      <strong>Falta header de seguridad: x-frame-options</strong>
+      <span class="meta">· entrega · http</span>
+    </div>
+    <div class="detail">x-frame-options — evita clickjacking (o usa CSP frame-ancestors). No presente en la respuesta de http://127.0.0.1:34157.</div>
+    
+    <details><summary>Prompt de fix (copy-paste)</summary><pre>[MEDIUM · security] Falta header de seguridad: x-frame-options
+Dispositivo: http. Ocurre en el flujo &quot;entrega&quot;.
+Síntoma observado por el ojo IA: x-frame-options — evita clickjacking (o usa CSP frame-ancestors). No presente en la respuesta de http://127.0.0.1:34157.
+
+Tarea: Investiga la causa raíz y aplica el cambio mínimo.
+Restricciones: cambio mínimo y quirúrgico. No refactorices de más. Incluye el path exacto del archivo que tocas.
+Verificación: vuelve a correr el escenario &quot;entrega&quot; en Vforge Live; el hallazgo (fingerprint f04de2f31cc3) no debe reaparecer.</pre></details>
+  </div>
+  <div class="finding" style="border-left:4px solid #6b7280">
+    <div class="finding-head">
+      <span class="badge" style="background:#6b7280">LOW</span>
+      <span class="cat">security</span>
+      <strong>Falta header de seguridad: x-content-type-options</strong>
+      <span class="meta">· entrega · http</span>
+    </div>
+    <div class="detail">x-content-type-options — evita MIME sniffing (nosniff). No presente en la respuesta de http://127.0.0.1:34157.</div>
+    
+    <details><summary>Prompt de fix (copy-paste)</summary><pre>[LOW · security] Falta header de seguridad: x-content-type-options
+Dispositivo: http. Ocurre en el flujo &quot;entrega&quot;.
+Síntoma observado por el ojo IA: x-content-type-options — evita MIME sniffing (nosniff). No presente en la respuesta de http://127.0.0.1:34157.
+
+Tarea: Investiga la causa raíz y aplica el cambio mínimo.
+Restricciones: cambio mínimo y quirúrgico. No refactorices de más. Incluye el path exacto del archivo que tocas.
+Verificación: vuelve a correr el escenario &quot;entrega&quot; en Vforge Live; el hallazgo (fingerprint 6521fd7420f6) no debe reaparecer.</pre></details>
+  </div>
+  <div class="finding" style="border-left:4px solid #6b7280">
+    <div class="finding-head">
+      <span class="badge" style="background:#6b7280">LOW</span>
+      <span class="cat">security</span>
+      <strong>Falta header de seguridad: content-security-policy</strong>
+      <span class="meta">· entrega · http</span>
+    </div>
+    <div class="detail">content-security-policy — mitiga XSS e inyección de contenido. No presente en la respuesta de http://127.0.0.1:34157.</div>
+    
+    <details><summary>Prompt de fix (copy-paste)</summary><pre>[LOW · security] Falta header de seguridad: content-security-policy
+Dispositivo: http. Ocurre en el flujo &quot;entrega&quot;.
+Síntoma observado por el ojo IA: content-security-policy — mitiga XSS e inyección de contenido. No presente en la respuesta de http://127.0.0.1:34157.
+
+Tarea: Investiga la causa raíz y aplica el cambio mínimo.
+Restricciones: cambio mínimo y quirúrgico. No refactorices de más. Incluye el path exacto del archivo que tocas.
+Verificación: vuelve a correr el escenario &quot;entrega&quot; en Vforge Live; el hallazgo (fingerprint 5daf61fe738a) no debe reaparecer.</pre></details>
+  </div>
+  <h2>Corridas — el ojo grabado</h2>
+  
+  <section class="run">
+    <h3>Login y dashboard <span class="meta">· desktop · 9915ms · <span class="fail">6 defecto(s)</span></span></h3>
+    <video controls preload="metadata" src="login-y-dashboard__desktop/video/page@dc48f907a1042ee2fbb52348d2cf48d6.webm" class="video"></video>
+    <div class="timeline"><div class="frame ok">
+        <img loading="lazy" src="login-y-dashboard__desktop/screenshots/step-00.png" alt="paso 0"/>
+        <div class="frame-cap">#0 ✅ Abrir (baseUrl) — Abrir la app</div>
+      </div><div class="frame ok">
+        <img loading="lazy" src="login-y-dashboard__desktop/screenshots/step-01.png" alt="paso 1"/>
+        <div class="frame-cap">#1 ✅ Verificar visible #login-form — El formulario de login debe verse</div>
+      </div><div class="frame ok">
+        <img loading="lazy" src="login-y-dashboard__desktop/screenshots/step-02.png" alt="paso 2"/>
+        <div class="frame-cap">#2 ✅ Escribir en #email — Escribir correo</div>
+      </div><div class="frame ok">
+        <img loading="lazy" src="login-y-dashboard__desktop/screenshots/step-03.png" alt="paso 3"/>
+        <div class="frame-cap">#3 ✅ Escribir en #password — Escribir contraseña</div>
+      </div><div class="frame ok">
+        <img loading="lazy" src="login-y-dashboard__desktop/screenshots/step-04.png" alt="paso 4"/>
+        <div class="frame-cap">#4 ✅ Clic en #login — Presionar Entrar</div>
+      </div><div class="frame bad">
+        <img loading="lazy" src="login-y-dashboard__desktop/screenshots/step-05.png" alt="paso 5"/>
+        <div class="frame-cap">#5 ❌ Verificar visible #dashboard — El dashboard debe aparecer tras login</div>
+      </div><div class="frame bad">
+        <img loading="lazy" src="login-y-dashboard__desktop/screenshots/step-06.png" alt="paso 6"/>
+        <div class="frame-cap">#6 ❌ Verificar texto &quot;Bienvenido&quot; — El dashboard debe saludar al usuario</div>
+      </div><div class="frame ok">
+        <img loading="lazy" src="login-y-dashboard__desktop/screenshots/step-07.png" alt="paso 7"/>
+        <div class="frame-cap">#7 ✅ Captura dashboard-final — Captura del estado final</div>
+      </div></div>
+  </section>
+  <section class="run">
+    <h3>Login y dashboard <span class="meta">· iphone · 10336ms · <span class="fail">6 defecto(s)</span></span></h3>
+    <video controls preload="metadata" src="login-y-dashboard__iphone/video/page@79a41d9e34ef5fba100580418ee0053b.webm" class="video"></video>
+    <div class="timeline"><div class="frame ok">
+        <img loading="lazy" src="login-y-dashboard__iphone/screenshots/step-00.png" alt="paso 0"/>
+        <div class="frame-cap">#0 ✅ Abrir (baseUrl) — Abrir la app</div>
+      </div><div class="frame ok">
+        <img loading="lazy" src="login-y-dashboard__iphone/screenshots/step-01.png" alt="paso 1"/>
+        <div class="frame-cap">#1 ✅ Verificar visible #login-form — El formulario de login debe verse</div>
+      </div><div class="frame ok">
+        <img loading="lazy" src="login-y-dashboard__iphone/screenshots/step-02.png" alt="paso 2"/>
+        <div class="frame-cap">#2 ✅ Escribir en #email — Escribir correo</div>
+      </div><div class="frame ok">
+        <img loading="lazy" src="login-y-dashboard__iphone/screenshots/step-03.png" alt="paso 3"/>
+        <div class="frame-cap">#3 ✅ Escribir en #password — Escribir contraseña</div>
+      </div><div class="frame ok">
+        <img loading="lazy" src="login-y-dashboard__iphone/screenshots/step-04.png" alt="paso 4"/>
+        <div class="frame-cap">#4 ✅ Clic en #login — Presionar Entrar</div>
+      </div><div class="frame bad">
+        <img loading="lazy" src="login-y-dashboard__iphone/screenshots/step-05.png" alt="paso 5"/>
+        <div class="frame-cap">#5 ❌ Verificar visible #dashboard — El dashboard debe aparecer tras login</div>
+      </div><div class="frame bad">
+        <img loading="lazy" src="login-y-dashboard__iphone/screenshots/step-06.png" alt="paso 6"/>
+        <div class="frame-cap">#6 ❌ Verificar texto &quot;Bienvenido&quot; — El dashboard debe saludar al usuario</div>
+      </div><div class="frame ok">
+        <img loading="lazy" src="login-y-dashboard__iphone/screenshots/step-07.png" alt="paso 7"/>
+        <div class="frame-cap">#7 ✅ Captura dashboard-final — Captura del estado final</div>
+      </div></div>
+  </section>
+</main>
+</body></html>
