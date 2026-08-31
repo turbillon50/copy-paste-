@@ -37,15 +37,15 @@ pnpm build            # compila a dist/
 
 ## Instalar en Vforge (consumir el paquete)
 
-El paquete se consume **directamente desde este repo** (`turbillon50/copy-paste-`), sin
+El paquete se consume **directamente desde este repo** (`turbillon50/vforge-live`), sin
 registry externo. El script `prepare` compila `dist/` automáticamente en la instalación,
 así que no hay pasos manuales.
 
 **a) Como git-dependency** (recomendado — fija a un tag o branch):
 
 ```bash
-pnpm add "github:turbillon50/copy-paste-#v0.3.0"
-# o una branch:  github:turbillon50/copy-paste-#claude/vforge-delivery-testing-poyfzs
+pnpm add "github:turbillon50/vforge-live#v0.3.0"
+# o una branch:  github:turbillon50/vforge-live#claude/vforge-delivery-testing-poyfzs
 ```
 
 **b) Como tarball** (build reproducible, offline):

@@ -17,11 +17,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/turbillon50/copy-paste-.git"
+    "url": "git+https://github.com/turbillon50/vforge-live.git"
   },
-  "homepage": "https://github.com/turbillon50/copy-paste-#readme",
+  "homepage": "https://github.com/turbillon50/vforge-live#readme",
   "bugs": {
-    "url": "https://github.com/turbillon50/copy-paste-/issues"
+    "url": "https://github.com/turbillon50/vforge-live/issues"
   },
   "engines": {
     "node": ">=18"
